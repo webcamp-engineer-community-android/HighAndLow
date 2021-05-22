@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hignAndLow(answer:Char) {
+        showDroidCard()
         answered = true
         val balance = droidCard - yourCard
 
@@ -75,6 +76,24 @@ class MainActivity : AppCompatActivity() {
             gameStart = false
         } else {
             // 処理なし
+        }
+    }
+
+    private fun showDroidCard() {
+        when (droidCard) {
+            1 -> droidCardImage.setImageResource(R.drawable.c01)
+            2 -> droidCardImage.setImageResource(R.drawable.c02)
+            3 -> droidCardImage.setImageResource(R.drawable.c03)
+            4 -> droidCardImage.setImageResource(R.drawable.c04)
+            5 -> droidCardImage.setImageResource(R.drawable.c05)
+            6 -> droidCardImage.setImageResource(R.drawable.c06)
+            7 -> droidCardImage.setImageResource(R.drawable.c07)
+            8 -> droidCardImage.setImageResource(R.drawable.c08)
+            9 -> droidCardImage.setImageResource(R.drawable.c09)
+            10 -> droidCardImage.setImageResource(R.drawable.c10)
+            11 -> droidCardImage.setImageResource(R.drawable.c11)
+            12 -> droidCardImage.setImageResource(R.drawable.c12)
+            13 -> droidCardImage.setImageResource(R.drawable.c13)
         }
     }
 
