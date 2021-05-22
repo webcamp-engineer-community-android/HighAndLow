@@ -2,4 +2,7 @@
     <string name="app_name">Hign and Low</string>
     <string name="hit_text">あたり</string>
     <string name="lose_text">はずれ</string>
+    <string name="high_text">Hign</string>
+    <string name="next_text">次へ</string>
+    <string name="low_text">Low</string>
 </resources>
