@@ -12,11 +12,29 @@ class MainActivity : AppCompatActivity() {
     private var hitCount = 0
     private var loseCount = 0
     private var gameStart = false
-    private var answerd = false
+    private var answered = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        hignBtn.setOnClickListener {
+            if (gameStart && !answered) {
+                hignAndLow('h')
+            }
+        }
+
+        lowBtn.setOnClickListener {
+            if (gameStart && !answered) {
+                hignAndLow('l')
+            }
+        }
+
+        nextBtn.setOnClickListener {
+            if (gameStart) {
+                drawCard()
+            }
+        }
     }
 
     override fun onResume() {
@@ -28,6 +46,36 @@ class MainActivity : AppCompatActivity() {
         loseText.text = getString(R.string.lose_text)
         gameStart = true
         drawCard()
+    }
+
+    private fun hignAndLow(answer:Char) {
+        answered = true
+        val balance = droidCard - yourCard
+
+        // 勝敗判定(1回毎)
+        if (balance == 0) {
+            // 処理なし
+        } else if ((balance > 0) && (answer == 'h')) {
+            hitCount++
+            hitText.text = getString(R.string.hit_text) + hitCount
+        } else if ((balance < 0) && (answer == 'l')) {
+            hitCount++
+            hitText.text = getString(R.string.hit_text) + hitCount
+        } else {
+            loseCount++
+            loseText.text = getString(R.string.lose_text) + loseCount
+        }
+
+        // 勝敗判定(最終)
+        if (hitCount == 5) {
+            resultText.text = "あなたの勝ちです"
+            gameStart = false
+        } else if (loseCount == 5) {
+            resultText.text = "あなたの負けです"
+            gameStart = false
+        } else {
+            // 処理なし
+        }
     }
 
     private fun drawCard() {
@@ -55,6 +103,6 @@ class MainActivity : AppCompatActivity() {
         }
         droidCard = (1..13).random()
         Log.d(tag, "droid:" + droidCard)
-        answerd = false
+        answered = false
     }
 }
