@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         hitCount = 0
         loseCount = 0
         hitText.text = getString(R.string.hit_text)
-        loseText.text = getString(R.string.lose_text)
+        loseText.text = getString(R.string.lost_text)
         gameStart = true
         drawCard()
     }
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             hitText.text = getString(R.string.hit_text) + hitCount
         } else {
             loseCount++
-            loseText.text = getString(R.string.lose_text) + loseCount
+            loseText.text = getString(R.string.lost_text) + loseCount
         }
 
         // 勝敗判定(最終)
