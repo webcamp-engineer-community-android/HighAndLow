@@ -1,8 +1,10 @@
 package com.example.hignandlow
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,15 +20,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        hignBtn.setOnClickListener {
+        highBtn.setOnClickListener {
             if (gameStart && !answered) {
-                hignAndLow('h')
+                highAndLow('h')
             }
         }
 
         lowBtn.setOnClickListener {
             if (gameStart && !answered) {
-                hignAndLow('l')
+                highAndLow('l')
             }
         }
 
@@ -35,6 +37,15 @@ class MainActivity : AppCompatActivity() {
                 drawCard()
             }
         }
+
+        resetButton.setOnClickListener {
+            allReset()
+        }
+
+        backButton.setOnClickListener {
+            val intent = Intent(this, LaunchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
@@ -42,40 +53,41 @@ class MainActivity : AppCompatActivity() {
 
         hitCount = 0
         loseCount = 0
-        hitText.text = getString(R.string.hit_text)
-        loseText.text = getString(R.string.lost_text)
+        hitText.text = getString(R.string.hit_count, hitCount)
+        loseText.text = getString(R.string.lost_count, loseCount)
         gameStart = true
         drawCard()
     }
 
-    private fun hignAndLow(answer:Char) {
+    private fun highAndLow(answer:Char) {
         showDroidCard()
         answered = true
         val balance = droidCard - yourCard
 
         // 勝敗判定(1回毎)
         if (balance == 0) {
-            // 処理なし
+            Toast.makeText(this, R.string.draw_text, Toast.LENGTH_SHORT).show()
         } else if ((balance > 0) && (answer == 'h')) {
             hitCount++
-            hitText.text = getString(R.string.hit_text) + hitCount
+            hitText.text = getString(R.string.hit_count, hitCount)
+            Toast.makeText(this, R.string.hit_text, Toast.LENGTH_SHORT).show()
         } else if ((balance < 0) && (answer == 'l')) {
             hitCount++
-            hitText.text = getString(R.string.hit_text) + hitCount
+            hitText.text = getString(R.string.hit_count, hitCount)
+            Toast.makeText(this, R.string.hit_text, Toast.LENGTH_SHORT).show()
         } else {
             loseCount++
-            loseText.text = getString(R.string.lost_text) + loseCount
+            loseText.text = getString(R.string.lost_count, loseCount)
+            Toast.makeText(this, R.string.lost_text, Toast.LENGTH_SHORT).show()
         }
 
         // 勝敗判定(最終)
         if (hitCount == 5) {
-            resultText.text = "あなたの勝ちです"
+            resultText.text = getString(R.string.win_comment)
             gameStart = false
         } else if (loseCount == 5) {
-            resultText.text = "あなたの負けです"
+            resultText.text = getString(R.string.lose_comment)
             gameStart = false
-        } else {
-            // 処理なし
         }
     }
 
@@ -123,5 +135,20 @@ class MainActivity : AppCompatActivity() {
         droidCard = (1..13).random()
         Log.d(tag, "droid:" + droidCard)
         answered = false
+    }
+
+    private fun allReset() {
+        hitCount = 0
+        loseCount = 0
+        hitText.text = getString(R.string.hit_count, hitCount)
+        loseText.text = getString(R.string.lost_count, loseCount)
+        resultText.text = ""
+
+        gameStart = true
+
+        showDroidCard()
+        drawCard()
+
+        Toast.makeText(this, R.string.reset_text, Toast.LENGTH_SHORT).show()
     }
 }
