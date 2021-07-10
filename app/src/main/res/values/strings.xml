@@ -1,8 +1,17 @@
 <resources>
-    <string name="app_name">Hign and Low</string>
+    <string name="app_name">High and Low</string>
     <string name="hit_text">あたり</string>
-    <string name="lose_text">はずれ</string>
-    <string name="high_text">Hign</string>
+    <string name="lost_text">はずれ</string>
+    <string name="draw_text">引き分け</string>
     <string name="next_text">次へ</string>
+    <string name="back_text">戻る</string>
+    <string name="reset_text">もう一回</string>
+    <string name="high_text">High</string>
     <string name="low_text">Low</string>
+
+    <string name="win_comment">あなたの勝ちです！</string>
+    <string name="lose_comment">あなたの負けです。</string>
+
+    <string name="hit_count">あたり：%1$d</string>
+    <string name="lost_count">はずれ：%1$d</string>
 </resources>
